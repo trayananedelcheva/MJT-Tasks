@@ -9,7 +9,6 @@ public class Customer extends AbstractCustomer {
 
     @Override
     public boolean hasVipCard() {
-        System.out.println("VIP");
         return false;
     }
 }
