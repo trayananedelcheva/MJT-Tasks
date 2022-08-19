@@ -9,7 +9,7 @@ public class VipCustomer extends AbstractCustomer{
 
     @Override
     public boolean hasVipCard() {
-        System.out.println("VIP");
+        System.out.println("VIP2");
         return true;
     }
 }
