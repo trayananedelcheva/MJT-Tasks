@@ -16,7 +16,6 @@ public class RaceTrackLauncher {
             car.run();
             cars.add(car);
         }
-        String s = "";
     }
 
     public static void main(String[] args) {

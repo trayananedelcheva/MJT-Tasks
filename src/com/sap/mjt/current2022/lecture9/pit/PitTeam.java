@@ -9,40 +9,40 @@ public class PitTeam extends Thread {
     private int nPitTeamStoppedCars = 0;
     private Pit pitStop;
 
-     public PitTeam(int id, Pit pitStop) {
-         checkParametersValidity(id, pitStop);
+    public PitTeam(int id, Pit pitStop) {
+        checkParametersValidity(id, pitStop);
 
-         this.id = id;
-         this.pitStop = pitStop;
-     }
+        this.id = id;
+        this.pitStop = pitStop;
+    }
 
-     private void checkParametersValidity(int id, Pit pitStop) {
-         if (id < 0) {
-             throw new IllegalArgumentException("Id should not be negative number!");
-         }
+    private void checkParametersValidity(int id, Pit pitStop) {
+        if (id < 0) {
+            throw new IllegalArgumentException("Id should not be negative number!");
+        }
 
-         if (pitStop == null) {
-             throw new IllegalArgumentException("Pit stop should not be null!");
-         }
-     }
+        if (pitStop == null) {
+            throw new IllegalArgumentException("Pit stop should not be null!");
+        }
+    }
 
-     @Override
+    @Override
     public void run() {
-         while (!pitStop.getWaitingCars().isEmpty()) {
-             Car car = pitStop.getCar();
-             this.nPitTeamStoppedCars++;
+        while (!pitStop.getWaitingCars().isEmpty()) {
+            Car car = pitStop.getCar();
+            this.nPitTeamStoppedCars++;
 
-             while (car != null) {
-                 try {
-                     Thread.sleep(new Random().nextInt(200));
-                 } catch (InterruptedException e) {
-                     e.printStackTrace();
-                 }
-             }
-         }
-     }
+            while (car != null) {
+                try {
+                    Thread.sleep(new Random().nextInt(200));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
-     public int getPitTeamStoppedCars() {
-         return this.nPitTeamStoppedCars;
-     }
+    public int getPitTeamStoppedCars() {
+        return this.nPitTeamStoppedCars;
+    }
 }
