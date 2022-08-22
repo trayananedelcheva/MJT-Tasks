@@ -13,7 +13,7 @@ public class Pit {
     private boolean isRaceFinished = false;
     private AtomicInteger nPitStops = new AtomicInteger(0);
 
-    Queue<Car> waitingCars;
+    private Queue<Car> waitingCars;
     List<PitTeam> pitTeams;
 
     public Pit(int nPitTeams) {
@@ -45,7 +45,7 @@ public class Pit {
         nPitStops.addAndGet(1);
     }
 
-    public Car getCar() {
+    public synchronized Car getCar() {
         waitForCars();
 
         return waitingCars.poll();
@@ -54,6 +54,7 @@ public class Pit {
     private void waitForCars() {
         synchronized (waitingCars) {
             while (waitingCars.isEmpty()) {
+                System.out.println("No cars waiting");
                 if (!isRaceFinished()) {
                     try {
                         waitingCars.wait();
@@ -79,5 +80,9 @@ public class Pit {
 
     public void finishRace() {
         this.isRaceFinished = true;
+    }
+
+    public Queue<Car> getWaitingCars() {
+        return this.waitingCars;
     }
 }

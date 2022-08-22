@@ -28,14 +28,16 @@ public class PitTeam extends Thread {
 
      @Override
     public void run() {
-         Car car = pitStop.getCar();
-         this.nPitTeamStoppedCars++;
+         while (!pitStop.getWaitingCars().isEmpty()) {
+             Car car = pitStop.getCar();
+             this.nPitTeamStoppedCars++;
 
-         while (car != null) {
-             try {
-                 Thread.sleep(new Random().nextInt(200));
-             } catch (InterruptedException e) {
-                 e.printStackTrace();
+             while (car != null) {
+                 try {
+                     Thread.sleep(new Random().nextInt(200));
+                 } catch (InterruptedException e) {
+                     e.printStackTrace();
+                 }
              }
          }
      }
