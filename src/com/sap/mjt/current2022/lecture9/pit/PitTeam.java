@@ -34,9 +34,6 @@ public class PitTeam extends Thread {
          while (car != null) {
              try {
                  Thread.sleep(new Random().nextInt(200));
-                 synchronized (car) {
-                     car.notifyAll();
-                 }
              } catch (InterruptedException e) {
                  e.printStackTrace();
              }

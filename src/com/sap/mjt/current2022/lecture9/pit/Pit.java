@@ -54,7 +54,6 @@ public class Pit {
     private void waitForCars() {
         synchronized (waitingCars) {
             while (waitingCars.isEmpty()) {
-                System.out.println("stuck");
                 if (!isRaceFinished()) {
                     try {
                         waitingCars.wait();
