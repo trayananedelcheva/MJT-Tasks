@@ -53,14 +53,11 @@ public class Pit {
 
     private void waitForCars() {
         synchronized (waitingCars) {
-            while (waitingCars.isEmpty()) {
-                System.out.println("No cars waiting");
-                if (!isRaceFinished()) {
-                    try {
-                        waitingCars.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+            while (waitingCars.isEmpty() && !isRaceFinished()) {
+                try {
+                    waitingCars.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -80,9 +77,8 @@ public class Pit {
 
     public void finishRace() {
         this.isRaceFinished = true;
-    }
-
-    public Queue<Car> getWaitingCars() {
-        return this.waitingCars;
+        synchronized (waitingCars) {
+            this.waitingCars.notifyAll();
+        }
     }
 }
